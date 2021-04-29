@@ -1,0 +1,9 @@
+{
+    "require": {
+        "htmlburger/carbon-fields": "^3.3"
+    },
+    "scripts": {
+    },
+    "extra": {
+    }
+}
