@@ -111,3 +111,27 @@ function swingbiz_deejays_display_all() {
 }
 
 add_shortcode('swingbiz-deejays', 'swingbiz_deejays_display_all'); // register the new shortcode
+
+
+function swingbiz_deejay_display($atts) {
+    ob_start();
+    $the_name = $atts['name'];
+    echo "<h2>" .  $the_name . "</h2>";
+    $results = new WP_Query(array('post_type' => 'deejays', 'post_name__in' => array($the_name)));
+
+    if ($results->have_posts()) {
+        $results->the_post();
+        echo "<h2>" . the_title() . "</h2>";
+        echo the_post_thumbnail('thumbnail');
+        echo "<div class='entry-content'>";
+        echo the_content();
+        echo "</div>";
+        wp_reset_postdata();
+    } else {
+        echo "<h2>Sorry, couldn't find the deejay requested.</h2>";
+    }   
+
+    return ob_get_clean();
+}
+
+add_shortcode('swingbiz-deejay', 'swingbiz_deejay_display');
