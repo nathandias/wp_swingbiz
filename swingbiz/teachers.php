@@ -111,3 +111,26 @@ function swingbiz_teachers_display_all() {
 }
 
 add_shortcode('swingbiz-teachers', 'swingbiz_teachers_display_all'); // register the new shortcode
+
+function swingbiz_teacher_display($atts =[], $content=null) {
+    ob_start();
+    $the_name = $atts['name'];
+    echo "<h2>" .  $the_name . "</h2>";
+    $results = new WP_Query(array('post_type' => 'teachers', 'name' => $the_name));
+
+    if ($results->have_posts()) {
+        $results->the_post();
+        echo "<h2>" . the_title() . "</h2>";
+        echo the_post_thumbnail('thumbnail');
+        echo "<div class='entry-content'>";
+        echo the_content();
+        echo "</div>";
+        wp_reset_postdata();
+    } else {
+        echo "<h2>Sorry, couldn't find the teacher requested.</h2>";
+    }   
+
+    return ob_get_clean();
+}
+
+add_shortcode('swingbiz-teacher', 'swingbiz_teacher_display');

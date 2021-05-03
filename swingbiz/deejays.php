@@ -86,7 +86,7 @@ function custom_deejay_post_type() {
     
 add_action( 'init', 'custom_deejay_post_type');
 
-# a shortcode that gets replaced with some static html
+# a shortcode that displays all the deejays in alpabetical order
 function swingbiz_deejays_display_all() {
     ob_start();  // start an output buffer - echos and prints will go there
 
@@ -113,11 +113,11 @@ function swingbiz_deejays_display_all() {
 add_shortcode('swingbiz-deejays', 'swingbiz_deejays_display_all'); // register the new shortcode
 
 
-function swingbiz_deejay_display($atts) {
+function swingbiz_deejay_display($atts =[], $content=null) {
     ob_start();
     $the_name = $atts['name'];
     echo "<h2>" .  $the_name . "</h2>";
-    $results = new WP_Query(array('post_type' => 'deejays', 'post_name__in' => array($the_name)));
+    $results = new WP_Query(array('post_type' => 'deejays', 'name' => $the_name));
 
     if ($results->have_posts()) {
         $results->the_post();
