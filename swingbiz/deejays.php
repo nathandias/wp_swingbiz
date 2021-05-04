@@ -1,26 +1,5 @@
 <?php
 
-// Our custom post type function
-function create_deejay_posttype() {
- 
-    register_post_type( 'deejays',
-    // CPT Options
-        array(
-            'labels' => array(
-                'name' => __( 'Deejays' ),
-                'singular_name' => __( 'Deejay' )
-            ),
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'deejays'),
-            'show_in_rest' => true,
- 
-        )
-    );
-}
-// Hooking up our function to theme setup
-add_action( 'init', 'create_deejay_posttype' );
-
 /*
 * Creating a function to create our CPT
 */

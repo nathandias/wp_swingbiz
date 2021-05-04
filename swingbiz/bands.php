@@ -1,26 +1,5 @@
 <?php
 
-// Our custom post type function
-function create_band_posttype() {
- 
-    register_post_type( 'bands',
-    // CPT Options
-        array(
-            'labels' => array(
-                'name' => __( 'Bands' ),
-                'singular_name' => __( 'Band' )
-            ),
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'bands'),
-            'show_in_rest' => true,
- 
-        )
-    );
-}
-// Hooking up our function to theme setup
-add_action( 'init', 'create_band_posttype' );
-
 /*
 * Creating a function to create our CPT
 */

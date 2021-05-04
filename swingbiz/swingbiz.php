@@ -14,7 +14,7 @@ require __DIR__ . '/vendor/autoload.php';
 include __DIR__ . '/bands.php';
 include __DIR__ . '/deejays.php';
 include __DIR__ . '/teachers.php';
-// include __DIR__ . '/class_descriptions.php';
+include __DIR__ . '/class_descriptions.php';
 
 include __DIR__ . '/plugin_settings.php';
 
