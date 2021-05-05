@@ -32,7 +32,7 @@ function custom_class_description_post_type() {
         // Features this CPT supports in Post Editor
         'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', ),
         // You can associate this CPT with a taxonomy or custom taxonomy. 
-        'taxonomies'          => array(),
+        'taxonomies'          => array('partnering_type'),
         /* A hierarchical CPT is like Pages and can have
         * Parent and child items. A non-hierarchical CPT
         * is like Posts.
@@ -55,7 +55,32 @@ function custom_class_description_post_type() {
          
     // Registering your Custom Post Type
     register_post_type( 'class_descriptions', $args );
-     
+
+    register_taxonomy('partnering_type', ['class_descriptions'], [
+        'label' => __('Partnering Types', 'swingbiz'),
+        'hierarchical' => false,
+        'show_admin_column' => true,
+        'rewrite' => ['slug' => 'partnering-type'],
+        'show_in_ui' => true,
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+        'labels' => [
+			'singular_name' => __('Partnering Type', 'swingbiz'),
+			'all_items' => __('All Partnering Types', 'swingbiz'),
+			'edit_item' => __('Edit Partnering Type', 'swingbiz'),
+			'view_item' => __('View Partnering Type', 'swingbiz'),
+			'update_item' => __('Update Partnering Type', 'swingbiz'),
+			'add_new_item' => __('Add New Partnering Type', 'swingbiz'),
+			'new_item_name' => __('New Partnering Type Name', 'swingbiz'),
+			'search_items' => __('Search Partnering Types', 'swingbiz'),
+			'parent_item' => __('Parent Partnering Type', 'swingbiz'),
+			'parent_item_colon' => __('Parent Partnering Type:', 'swingbiz'),
+			'not_found' => __('No Partnering Types found', 'swingbiz'),
+        ]
+    ]);
+
+    register_taxonomy_for_object_type('partnering_type', 'class_descriptions');
+    add_submenu_page('swingbiz', 'Class Categories', 'Class Categories', 'manage_options', 'edit-tags.php?taxonomy=partnering_type&post_type=class_descriptions', '');     
 }
 
 /* Hook into the 'init' action so that the function
@@ -64,6 +89,7 @@ function custom_class_description_post_type() {
 */
     
 add_action( 'init', 'custom_class_description_post_type');
+
 
 # a shortcode that gets replaced with some static html
 function swingbiz_class_descriptions_display_all() {
